@@ -63,6 +63,7 @@ def profile(request, username):
         }
         return render(request, 'posts/profile.html', context)
 
+
 def post_detail(request, post_id):
     posts = get_object_or_404(Post, pk=post_id)
     title = (f'Пост: {posts.text[:30]}')
