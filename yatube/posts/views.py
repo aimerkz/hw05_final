@@ -43,8 +43,8 @@ def profile(request, username):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     title = (f'Профайл пользователя {username}')
-    following = request.user.is_authenticated
-    if following:
+    following = False
+    if request.user.is_authenticated:
         following = Follow.objects.filter(
             user=request.user,
             author=author)
