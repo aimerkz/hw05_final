@@ -63,6 +63,7 @@ class PostPagesTests(TestCase):
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
 
     def setUp(self):
+        self.guest_client = Client()
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
 
@@ -94,11 +95,6 @@ class PostPagesTests(TestCase):
             reverse('posts:post_edit', kwargs={'post_id': self.post.pk})
         )
         self.assertTemplateUsed(response, 'posts/create_post.html')
-
-    def setUp(self):
-        self.guest_client = Client()
-        self.authorized_client = Client()
-        self.authorized_client.force_login(self.user)
 
     # Проверяем контекст
     def test_index_page_show_correct_context(self):
@@ -237,9 +233,6 @@ class PaginatorViewsTests(TestCase):
             with self.subTest(reverses_item=reverses_item):
                 response = self.authorized_client.get(reverses_item)
                 self.assertEqual(len(response.context['page_obj']), 10)
-
-        for reverses_item in reverses_names:
-            with self.subTest(reverses_item=reverses_item):
                 response = self.authorized_client.get(
                     reverses_item + '?page=2')
                 self.assertEqual(len(response.context['page_obj']), 3)

@@ -22,6 +22,7 @@ class StaticURLTests(TestCase):
             reverse('users:signup'): HTTPStatus.OK,
             reverse('users:login'): HTTPStatus.OK,
             reverse('users:password_reset_form'): HTTPStatus.OK,
+            reverse('users:password_reset_done'): HTTPStatus.OK,
         }
         for url, status_code in url_names.items():
             with self.subTest(url=url):
@@ -29,7 +30,7 @@ class StaticURLTests(TestCase):
                 self.assertEqual(response.status_code, status_code)
 
     def test_users_urls_auth_status(self):
-        """Страницы изменения паролья и выхода
+        """Страницы изменения пароля и выхода
         доступны только авторизованному пользователю."""
         url_names = {
             reverse('users:password_change_form'): HTTPStatus.OK,

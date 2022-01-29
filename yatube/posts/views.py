@@ -48,7 +48,7 @@ def profile(request, username):
         following = Follow.objects.filter(
             user=request.user,
             author=author
-        )
+        ).exists()
     context = {
         'title': title,
         'page_obj': page_obj,
@@ -157,8 +157,7 @@ def profile_follow(request, username):
 
 @login_required
 def profile_unfollow(request, username):
-    follower = get_object_or_404(
-        Follow,
+    follower = Follow.objects.filter(
         user=request.user,
         author__username=username
     )
