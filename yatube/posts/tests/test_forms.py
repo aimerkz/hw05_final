@@ -86,7 +86,7 @@ class PostFormTests(TestCase):
         )
 
     def test_post_edit(self):
-        """Валидная форма редактирует запись в Post"""
+        """Валидная форма редактирует запись в Post."""
         form_data = {
             'text': 'Текст поста для теста_2',
             'group': self.group.pk,

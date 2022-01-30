@@ -30,7 +30,9 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'testserver',
     '[::1]',
-    '192.168.1.44'
+    '192.168.1.44',
+    'www.merkz.pythonanywhere.com',
+    'merkz.pythonanywhere.com',
 ]
 
 
@@ -48,6 +50,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'about.apps.AboutConfig',
     'sorl.thumbnail',
+    'debug_toolbar',
 ]
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
@@ -60,6 +63,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 ROOT_URLCONF = 'yatube.urls'

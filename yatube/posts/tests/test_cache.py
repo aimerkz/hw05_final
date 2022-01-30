@@ -50,5 +50,7 @@ class PostIndexCacheTest(TestCase):
         cache.clear()
         # Сделали новый запрос
         response_post_now = self.guest_client.get(reverse('posts:index'))
+        # Сохранили контент запроса в переменную
+        content_post_now = response_post_now
         # Сравнили, что пост отображается с другим контентом - кэш был удален
-        self.assertNotEqual(response_post_now, response_post_before)
+        self.assertNotEqual(content_post_now, content_post_before)

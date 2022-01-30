@@ -22,7 +22,6 @@ class StaticURLTests(TestCase):
             reverse('users:signup'): HTTPStatus.OK,
             reverse('users:login'): HTTPStatus.OK,
             reverse('users:password_reset_form'): HTTPStatus.OK,
-            reverse('users:password_reset_done'): HTTPStatus.OK,
         }
         for url, status_code in url_names.items():
             with self.subTest(url=url):
