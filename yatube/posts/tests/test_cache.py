@@ -34,7 +34,7 @@ class PostIndexCacheTest(TestCase):
         # Результат запроса сохранили в переменную
         content_post_before = response_post_before.content
         # Удалили пост
-        Post.objects.filter(pk=1).delete()
+        Post.objects.filter(pk=self.post.pk).delete()
         # Снова сделали запрос
         response_post_after = self.guest_client.get(reverse('posts:index'))
         # Снова сохранили результат запроса в переменную
