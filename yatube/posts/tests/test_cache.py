@@ -22,21 +22,18 @@ class PostIndexCacheTest(TestCase):
             text='Тестовый текст для поста'
         )
 
-    def setUp(self):
-        self.guest_client = Client()
-
     def test_index_cache(self):
         """Проверка работы кэша на странице index."""
         # Посчитали количество постов
         posts_count_before = Post.objects.all().count()
         # Сделали запрос
-        response_post_before = self.guest_client.get(reverse('posts:index'))
+        response_post_before = self.client.get(reverse('posts:index'))
         # Результат запроса сохранили в переменную
         content_post_before = response_post_before.content
         # Удалили пост
         Post.objects.filter(pk=self.post.pk).delete()
         # Снова сделали запрос
-        response_post_after = self.guest_client.get(reverse('posts:index'))
+        response_post_after = self.client.get(reverse('posts:index'))
         # Снова сохранили результат запроса в переменную
         content_post_after = response_post_after.content
         # Снова посчитали количество постов
@@ -49,7 +46,7 @@ class PostIndexCacheTest(TestCase):
         # Почистили кэш
         cache.clear()
         # Сделали новый запрос
-        response_post_now = self.guest_client.get(reverse('posts:index'))
+        response_post_now = self.client.get(reverse('posts:index'))
         # Сохранили контент запроса в переменную
         content_post_now = response_post_now
         # Сравнили, что пост отображается с другим контентом - кэш был удален

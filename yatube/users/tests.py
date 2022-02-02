@@ -107,3 +107,33 @@ class CreationFormTests(TestCase):
                 last_name='Testovich',
                 email='testovich@yandex.ru'
             ).exists())
+
+
+# Проверяем форму изменения пароля
+class ChangeFormTests(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='TestArtem',
+            password='Parol123')
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.user)
+
+    def test_change_pass(self):
+        """Валидная форма изменяет пароль."""
+        form_data = {
+            'old_password': 'Parol123',
+            'new_password1': 'Ghtkkptjh674j',
+            'new_password2': 'Ghtkkptjh674j',
+        }
+        # POST-запрос на изменение пароля
+        response = self.authorized_client.post(reverse(
+            'users:password_change_form'),
+            data=form_data,
+            follow=True
+        )
+        # Проверили редирект
+        self.assertRedirects(response, reverse('users:password_change_done'))
+        # Проверили, что пароль изменился
+        self.assertTrue(User.objects.get(
+            username=self.user.username).check_password('Ghtkkptjh674j'))

@@ -73,7 +73,7 @@ class PostFormTests(TestCase):
         )
         # Проверили редирект
         self.assertRedirects(response, reverse(
-            'posts:profile', kwargs={'username': 'TestArt'})
+            'posts:profile', kwargs={'username': self.user.username})
         )
         # Снова проверили количество постов
         self.assertEqual(Post.objects.count(), posts_count + 1)
