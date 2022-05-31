@@ -145,4 +145,7 @@ dmypy.json
 
 .mypy_cache
 
+<<<<<<< HEAD
 yatube/media/
+=======
+>>>>>>> 4fe310ccf64aa3d9baec39ac414aa6e72866dc48
