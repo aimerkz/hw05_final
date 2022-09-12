@@ -11,7 +11,7 @@
 ## _Запуск_:
 - Клонируйте репозиторий:
 ```sh
-https://github.com/aimerkz/hw05_final.git
+git clone https://github.com/aimerkz/hw05_final.git
 ```
 - Установка зависимостей:
 ```sh
